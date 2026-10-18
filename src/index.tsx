@@ -5,8 +5,13 @@ import { buildSearchUrl } from "./utils/settings";
 import { SearchResult } from "./utils/types";
 import { useSearch } from "./utils/useSearch";
 
-const CATEGORY_ACTIONS = [
-  { category: "images", title: "Search Images", icon: Icon.Image },
+const CATEGORY_ACTIONS: { category: string; title: string; icon: Icon; shortcut?: Keyboard.Shortcut }[] = [
+  {
+    category: "images",
+    title: "Search Images",
+    icon: Icon.Image,
+    shortcut: { modifiers: ["shift", "cmd"], key: "i" },
+  },
   { category: "news", title: "Search News", icon: Icon.Document },
   { category: "videos", title: "Search Videos", icon: Icon.Video },
   { category: "map", title: "Search Maps", icon: Icon.Map },
@@ -90,6 +95,7 @@ export default function Command(props: { arguments?: { query?: string }; fallbac
                       key={entry.category}
                       title={entry.title}
                       icon={{ source: entry.icon }}
+                      shortcut={entry.shortcut}
                       onAction={() => openUrl(item, buildSearchUrl(item.query, entry.category))}
                     />
                   ))}
