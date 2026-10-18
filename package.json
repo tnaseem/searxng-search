@@ -1,0 +1,199 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "searxng-search",
+  "title": "SearXNG Search",
+  "description": "Search any SearXNG instance with autosuggestions",
+  "icon": "icon.png",
+  "author": "tarique",
+  "license": "MIT",
+  "categories": [
+    "Web"
+  ],
+  "commands": [
+    {
+      "name": "index",
+      "title": "SearXNG Search",
+      "description": "Search your SearXNG instance with autosuggestions",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "placeholder": "Query",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "searchSelectText",
+      "title": "Search SearXNG for Selected Text",
+      "description": "Search your SearXNG instance for the selected text",
+      "mode": "no-view",
+      "preferences": [
+        {
+          "name": "useClipboardFallback",
+          "type": "checkbox",
+          "required": false,
+          "default": false,
+          "label": "Use Clipboard Fallback",
+          "description": "When no text is selected, fall back to using clipboard content for search."
+        }
+      ]
+    },
+    {
+      "name": "openInstance",
+      "title": "Open SearXNG",
+      "description": "Open your SearXNG instance in the browser",
+      "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "baseUrl",
+      "title": "Instance URL",
+      "type": "textfield",
+      "required": true,
+      "default": "https://search.naseem.uk",
+      "placeholder": "https://search.example.com",
+      "label": "Instance URL",
+      "description": "Base URL of your SearXNG instance, with no trailing slash. /search and /autocompleter are appended to it."
+    },
+    {
+      "name": "defaultCategories",
+      "type": "dropdown",
+      "required": false,
+      "default": "general",
+      "label": "Default Category",
+      "description": "SearXNG category used for the main search.",
+      "data": [
+        {
+          "title": "General",
+          "value": "general"
+        },
+        {
+          "title": "Images",
+          "value": "images"
+        },
+        {
+          "title": "News",
+          "value": "news"
+        },
+        {
+          "title": "Videos",
+          "value": "videos"
+        },
+        {
+          "title": "Music",
+          "value": "music"
+        },
+        {
+          "title": "IT",
+          "value": "it"
+        },
+        {
+          "title": "Science",
+          "value": "science"
+        },
+        {
+          "title": "Files",
+          "value": "files"
+        },
+        {
+          "title": "Map",
+          "value": "map"
+        }
+      ]
+    },
+    {
+      "name": "language",
+      "type": "dropdown",
+      "required": false,
+      "default": "auto",
+      "label": "Language",
+      "description": "Language sent to SearXNG. Auto lets the instance decide.",
+      "data": [
+        {
+          "title": "Auto",
+          "value": "auto"
+        },
+        {
+          "title": "English",
+          "value": "en"
+        },
+        {
+          "title": "English (UK)",
+          "value": "en-GB"
+        },
+        {
+          "title": "English (US)",
+          "value": "en-US"
+        },
+        {
+          "title": "French",
+          "value": "fr"
+        },
+        {
+          "title": "German",
+          "value": "de"
+        },
+        {
+          "title": "Spanish",
+          "value": "es"
+        }
+      ]
+    },
+    {
+      "name": "safesearch",
+      "type": "dropdown",
+      "required": false,
+      "default": "0",
+      "label": "Safe Search",
+      "description": "Safe search level passed to SearXNG.",
+      "data": [
+        {
+          "title": "Off",
+          "value": "0"
+        },
+        {
+          "title": "Moderate",
+          "value": "1"
+        },
+        {
+          "title": "Strict",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "rememberSearchHistory",
+      "type": "checkbox",
+      "required": false,
+      "default": true,
+      "label": "Remember Search History",
+      "description": "Locally store search history, keyed by instance URL."
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.104.25"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist -o dist",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix"
+  },
+  "platforms": [
+    "macOS"
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
