@@ -1,64 +1,53 @@
 # SearXNG Search
 
-Raycast extension for searching your own [SearXNG](https://docs.searxng.org/) instance with
-autosuggestions. Runs in Raycast and in [Tinycast](https://github.com/abue-ammar/tinycast).
+Search your own [SearXNG](https://docs.searxng.org/) instance from Raycast or
+[Tinycast](https://github.com/abue-ammar/tinycast), with suggestions as you type.
 
 ## Features
 
-- Live autosuggestions from the instance's `/autocompleter` endpoint, whatever backend it uses
-- One row per suggestion; return opens the search in your default browser
-- Category shortcuts for images, news, videos and maps on every row
-- Search selected text, with optional clipboard fallback
-- Search history stored locally, keyed by instance URL
-- Works as a Raycast/Tinycast fallback command
+- Suggestions appear as you type, straight from your instance
+- Press return to open the search in your default browser
+- **Shift-Cmd-I** for an image search, with news, videos and maps on every row
+- Search the text you have selected, with optional clipboard fallback
+- Recent searches are kept locally and reappear next time
+- Works as a fallback command, so you can throw text at it from anywhere
+
+## Getting Started
+
+1. Install the extension and turn it on in Settings -> Extensions.
+2. Open the extension's preferences.
+3. Enter the address of your instance, for example `https://search.example.com`.
+
+That is all it needs. The address is the only required setting.
 
 ## Preferences
 
-| Preference | Default | Notes |
+| Setting | Default | What it does |
 | --- | --- | --- |
-| Instance URL | *(blank)* | Scheme optional, trailing slashes trimmed. The commands prompt for it when empty |
-| Default Category | General | Applies to the main search URL |
-| Language | Auto | Omitted when set to Auto |
-| Safe Search | Off | `safesearch=0`, `1` or `2` |
-| Remember Search History | On | Stored per instance URL |
+| Instance URL | *empty* | Address of your SearXNG instance. `https://` is added if you leave it out |
+| Default Category | General | Category used for the main search |
+| Language | Auto | Language sent to the instance. Auto lets it decide |
+| Safe Search | Off | Off, Moderate or Strict |
+| Remember Search History | On | Keep recent searches on this Mac |
 
-## How It Works
+## Privacy
 
-Suggestions come from `GET {instance}/autocompleter?q=...`; selecting a row opens
-`{instance}/search?q=...&categories=...&language=...&safesearch=...` in the default browser. Nothing
-is scraped, so the instance's HTML theme and its rate limiter never get in the way.
+Searches go only to your own instance. Nothing else is contacted, nothing is scraped, and no telemetry
+is collected.
 
-The autocomplete response is normalised from all the shapes SearXNG's backends return: Google's
-`[query, suggestions[], descriptions[], [], {...}]` tuple, a flat array of strings, an array of
-`{ text }` or `{ phrase }` objects, or `{ suggestions: [] }`.
+Recent searches are stored on this Mac and never leave it. They are kept separately for each instance
+address, so changing the address starts a fresh list.
 
-A `User-Agent` header is sent explicitly because the instance's bot detection answers 429 to requests
-without one.
+## Troubleshooting
 
-## Icon
+**Suggestions stop appearing.** Check the instance address in the preferences, and that the instance is
+reachable from this Mac - including over a VPN if it runs on your own network.
 
-`assets/icon.svg` is the source; `assets/icon.png` is what the manifest points at. Render the PNG with
-`rsvg-convert`, not ImageMagick - ImageMagick's built-in SVG renderer drops stroke attributes, which
-produces a blank tile:
+**"Could not load suggestions" with a 429.** The instance is rate-limiting the extension. Relax the
+limiter, or allow this Mac, in the instance's `limiter.toml`.
 
-```bash
-rsvg-convert -w 512 -h 512 assets/icon.svg -o assets/icon.png
-```
+**The list is empty.** Searches you saved under a previous instance address stay with that address.
 
-## Building
+## Licence
 
-```bash
-pnpm install
-pnpm build          # emits dist/ with package.json, index.js, searchSelectText.js, openInstance.js, assets/
-```
-
-### Installing in Tinycast
-
-Settings -> Extensions -> **Add from folder** -> choose `dist`. Extensions are off by default; turn
-them on in the same pane. Rebuild and re-add the folder after changes.
-
-### Installing in Raycast
-
-```bash
-pnpm dev
-```
+MIT
