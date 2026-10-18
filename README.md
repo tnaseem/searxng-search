@@ -42,15 +42,6 @@ checked in, so a fresh clone has none until you run the build.
 2. Choose **Add from folder**.
 3. Select the **`dist`** folder inside this repository.
 
-Pointing it at the repository root instead of `dist` will not work. Tinycast looks for the built
-JavaScript files, which only exist in `dist`.
-
-Then turn the extension on in the same pane - extensions are off by default - and, if you want it in
-the launcher, check **Show in launcher** on its row.
-
-After changing anything in `src`, run `pnpm build` and add the `dist` folder again. Tinycast caches
-manifests and icons, so restart it after a build that changes an icon or the manifest.
-
 ## Install in Raycast
 
 ```bash
