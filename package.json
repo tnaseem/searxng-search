@@ -53,7 +53,6 @@
       "title": "Instance URL",
       "type": "textfield",
       "required": true,
-      "default": "https://search.naseem.uk",
       "placeholder": "https://search.example.com",
       "label": "Instance URL",
       "description": "Base URL of your SearXNG instance, with no trailing slash. /search and /autocompleter are appended to it."

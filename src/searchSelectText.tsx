@@ -36,6 +36,10 @@ export default async function Command() {
       throw new Error("No text selected");
     }
 
+    if (!settings.baseUrl) {
+      throw new Error("Set your SearXNG instance URL in the extension preferences");
+    }
+
     const url = buildSearchUrl(searchText);
     await open(url);
     await closeMainWindow();

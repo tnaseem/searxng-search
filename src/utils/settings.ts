@@ -1,17 +1,16 @@
 import { getPreferenceValues } from "@raycast/api";
 import { Settings } from "./types";
 
-export const DEFAULT_BASE_URL = "https://search.naseem.uk";
-
 /**
  * Accepts what people paste: with or without a scheme, with a trailing slash,
- * or with the /search endpoint already attached.
+ * or with the /search endpoint already attached. An empty value stays empty -
+ * the commands then ask for an instance URL instead of guessing one.
  */
 export function normaliseBaseUrl(raw: string | undefined): string {
   let value = (raw ?? "").trim();
 
   if (!value) {
-    return DEFAULT_BASE_URL;
+    return "";
   }
 
   if (!/^https?:\/\//i.test(value)) {

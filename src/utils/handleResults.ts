@@ -14,15 +14,15 @@ export function newId(): string {
 
 export function describeSuggestion(text: string, settings: Settings): string {
   const host = settings.baseUrl.replace(/^https?:\/\//i, "");
-  return `Search ${host} for '${text}'`;
+  return host ? `Search ${host} for '${text}'` : `Search for '${text}'`;
 }
 
 export function getStaticResult(searchText: string): SearchResult[] {
-  if (!searchText.trim()) {
+  const settings = getSettings();
+
+  if (!searchText.trim() || !settings.baseUrl) {
     return [];
   }
-
-  const settings = getSettings();
 
   return [
     {
@@ -130,6 +130,11 @@ export function normaliseSuggestions(json: unknown): Suggestion[] {
 
 export async function getAutoSearchResults(searchText: string, signal?: AbortSignal): Promise<SearchResult[]> {
   const settings = getSettings();
+
+  if (!settings.baseUrl || !searchText.trim()) {
+    return [];
+  }
+
   const response = await fetch(getAutocompleteUrl(settings.baseUrl, searchText), {
     signal,
     headers: {
@@ -159,7 +164,7 @@ export async function getAutoSearchResults(searchText: string, signal?: AbortSig
 }
 
 export async function getSearchHistory(settings: Settings = getSettings()): Promise<SearchResult[]> {
-  if (!settings.rememberSearchHistory) {
+  if (!settings.rememberSearchHistory || !settings.baseUrl) {
     return [];
   }
 

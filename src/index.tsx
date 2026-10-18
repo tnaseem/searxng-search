@@ -1,4 +1,4 @@
-import { Action, ActionPanel, closeMainWindow, Icon, Keyboard, List, open } from "@raycast/api";
+import { Action, ActionPanel, closeMainWindow, Icon, Keyboard, List, open, openExtensionPreferences } from "@raycast/api";
 import { newId } from "./utils/handleResults";
 import { getIcon } from "./utils/resultUtils";
 import { buildSearchUrl } from "./utils/settings";
@@ -24,6 +24,23 @@ export default function Command(props: { arguments?: { query?: string }; fallbac
     deleteAllHistory,
     deleteHistoryItem,
   } = useSearch(initialQuery);
+
+  if (!settings.baseUrl) {
+    return (
+      <List>
+        <List.EmptyView
+          title="Set your SearXNG instance URL"
+          description="Open the extension preferences and enter the base URL of your instance, for example https://search.example.com"
+          icon={Icon.Gear}
+          actions={
+            <ActionPanel>
+              <Action title="Open Extension Preferences" icon={Icon.Gear} onAction={openExtensionPreferences} />
+            </ActionPanel>
+          }
+        />
+      </List>
+    );
+  }
 
   async function openUrl(result: SearchResult, url: string) {
     await addHistory({ ...result, id: newId(), url });
