@@ -12,11 +12,57 @@ Search your own [SearXNG](https://docs.searxng.org/) instance from Raycast or
 - Recent searches are kept locally and reappear next time
 - Works as a fallback command, so you can throw text at it from anywhere
 
+## Before You Install
+
+This extension is not in the Raycast store, so there is no one-click install. You build it once on your
+Mac, then point your launcher at the built folder.
+
+You need:
+
+- macOS
+- [Node.js](https://nodejs.org/) 20 or newer, which brings `npm`
+- [pnpm](https://pnpm.io/installation) - `brew install pnpm` or `npm install -g pnpm`
+
+## Build It
+
+From the root of this repository:
+
+```bash
+pnpm install
+pnpm build
+```
+
+The build writes a `dist` folder next to `src`. That folder - not the repository root - is what you
+install. It contains `package.json`, one JavaScript file per command and the `assets` folder. It is not
+checked in, so a fresh clone has none until you run the build.
+
+## Install in Tinycast
+
+1. Open **Settings -> Extensions**.
+2. Choose **Add from folder**.
+3. Select the **`dist`** folder inside this repository.
+
+Pointing it at the repository root instead of `dist` will not work. Tinycast looks for the built
+JavaScript files, which only exist in `dist`.
+
+Then turn the extension on in the same pane - extensions are off by default - and, if you want it in
+the launcher, check **Show in launcher** on its row.
+
+After changing anything in `src`, run `pnpm build` and add the `dist` folder again. Tinycast caches
+manifests and icons, so restart it after a build that changes an icon or the manifest.
+
+## Install in Raycast
+
+```bash
+pnpm dev
+```
+
+Raycast picks the extension up from there. Changes are rebuilt as you save.
+
 ## Getting Started
 
-1. Install the extension and turn it on in Settings -> Extensions.
-2. Open the extension's preferences.
-3. Enter the address of your instance, for example `https://search.example.com`.
+1. Open the extension's preferences - **Cmd-K -> Configure Extension** from any of its commands.
+2. Enter the address of your instance, for example `https://search.example.com`.
 
 That is all it needs. The address is the only required setting.
 
@@ -47,6 +93,9 @@ reachable from this Mac - including over a VPN if it runs on your own network.
 limiter, or allow this Mac, in the instance's `limiter.toml`.
 
 **The list is empty.** Searches you saved under a previous instance address stay with that address.
+
+**The extension does not appear in Tinycast.** Check you added `dist` and not the repository root, then
+turn it on under Settings -> Extensions.
 
 ## Licence
 
