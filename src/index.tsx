@@ -53,7 +53,7 @@ export default function Command(props: { arguments?: { query?: string }; fallbac
       isLoading={isLoading}
       searchText={searchText}
       onSearchTextChange={search}
-      searchBarPlaceholder={`Search ${settings.baseUrl.replace(/^https?:\/\//i, "")}...`}
+      searchBarPlaceholder="Search SearXNG or enter a URL..."
     >
       <List.Section title="Results" subtitle={results.length + ""}>
         {results.map((item) => (
