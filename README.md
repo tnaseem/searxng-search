@@ -26,6 +26,19 @@ Nothing to build. This is the quickest route.
 2. Unzip it. You get a folder called `searxng-search`.
 3. In Tinycast, open **Settings -> Extensions**, choose **Add from folder**, and select that folder.
 
+### From GitHub
+
+Tinycast builds it on your Mac from this repository. You need Node.js 20 or newer and one package
+manager - pnpm, Bun, Yarn or npm.
+
+1. Open **Settings -> Extensions -> Install**.
+2. Choose **Install from GitHub**.
+3. Enter `tnaseem/searxng-raycast`.
+4. Leave the package manager on Automatic and press **Install**.
+
+It downloads the source, installs dependencies and builds, then keeps only the build. The source and
+its dependencies are deleted afterwards, so re-run this to pick up new commits.
+
 ### From Source
 
 You need macOS, [Node.js](https://nodejs.org/) 20 or newer and
