@@ -21,7 +21,7 @@ suits you.
 
 Nothing to build. This is the quickest route.
 
-1. Open [Releases](https://github.com/tnaseem/searxng-raycast/releases/latest) and download the latest
+1. Open [Releases](https://github.com/tnaseem/searxng-search/releases/latest) and download the latest
    `searxng-search-vX.Y.Z.zip`.
 2. Unzip it. You get a folder called `searxng-search`.
 3. In Tinycast, open **Settings -> Extensions**, choose **Add from folder**, and select that folder.
@@ -33,7 +33,7 @@ manager - pnpm, Bun, Yarn or npm.
 
 1. Open **Settings -> Extensions -> Install**.
 2. Choose **Install from GitHub**.
-3. Enter `tnaseem/searxng-raycast`.
+3. Enter `tnaseem/searxng-search`.
 4. Leave the package manager on Automatic and press **Install**.
 
 It downloads the source, installs dependencies and builds, then keeps only the build. The source and
