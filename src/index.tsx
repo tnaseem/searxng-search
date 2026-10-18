@@ -90,12 +90,6 @@ export default function Command(props: { arguments?: { query?: string }; fallbac
                     content={item.query}
                     shortcut={Keyboard.Shortcut.Common.Copy}
                   />
-                  <Action
-                    title="Set as Search Text"
-                    onAction={() => search(item.query)}
-                    icon={{ source: Icon.MagnifyingGlass }}
-                    shortcut={{ modifiers: ["shift"], key: "tab" }}
-                  />
                 </ActionPanel.Section>
 
                 <ActionPanel.Section title="Other Searches">
