@@ -12,35 +12,32 @@ Search your own [SearXNG](https://docs.searxng.org/) instance from Raycast or
 - Recent searches are kept locally and reappear next time
 - Works as a fallback command, so you can throw text at it from anywhere
 
-## Before You Install
+## Install in Tinycast
 
-This extension is not in the Raycast store, so there is no one-click install. You build it once on your
-Mac, then point your launcher at the built folder.
+Tinycast installs an extension from a folder, so there is no one-click install. Pick whichever route
+suits you.
 
-You need:
+### From a Release
 
-- macOS
-- [Node.js](https://nodejs.org/) 20 or newer, which brings `npm`
-- [pnpm](https://pnpm.io/installation) - `brew install pnpm` or `npm install -g pnpm`
+Nothing to build. This is the quickest route.
 
-## Build It
+1. Open [Releases](https://github.com/tnaseem/searxng-raycast/releases/latest) and download the latest
+   `searxng-search-vX.Y.Z.zip`.
+2. Unzip it. You get a folder called `searxng-search`.
+3. In Tinycast, open **Settings -> Extensions**, choose **Add from folder**, and select that folder.
 
-From the root of this repository:
+### From Source
+
+You need macOS, [Node.js](https://nodejs.org/) 20 or newer and
+[pnpm](https://pnpm.io/installation) - `brew install pnpm` or `npm install -g pnpm`.
 
 ```bash
 pnpm install
 pnpm build
 ```
 
-The build writes a `dist` folder next to `src`. That folder - not the repository root - is what you
-install. It contains `package.json`, one JavaScript file per command and the `assets` folder. It is not
-checked in, so a fresh clone has none until you run the build.
-
-## Install in Tinycast
-
-1. Open **Settings -> Extensions**.
-2. Choose **Add from folder**.
-3. Select the **`dist`** folder inside this repository.
+The build writes a `dist` folder next to `src`. Add that folder with **Add from folder**, the same way
+as a release.
 
 ## Install in Raycast
 
@@ -48,7 +45,7 @@ checked in, so a fresh clone has none until you run the build.
 pnpm dev
 ```
 
-Raycast picks the extension up from there. Changes are rebuilt as you save.
+Raycast picks the extension up from there and rebuilds as you save.
 
 ## Getting Started
 
@@ -85,8 +82,9 @@ limiter, or allow this Mac, in the instance's `limiter.toml`.
 
 **The list is empty.** Searches you saved under a previous instance address stay with that address.
 
-**The extension does not appear in Tinycast.** Check you added `dist` and not the repository root, then
-turn it on under Settings -> Extensions.
+**The extension does not appear in Tinycast.** Check you added the folder that holds `package.json` -
+the unzipped release folder or `dist` - not the repository root, then turn it on under
+Settings -> Extensions.
 
 ## Licence
 

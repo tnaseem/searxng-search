@@ -4,3 +4,4 @@ dist
 raycast-env.d.ts
 *.log
 test/run.cjs
+*.zip

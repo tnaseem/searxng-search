@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build extension
+        run: pnpm build
+
+      - name: Package for Tinycast
+        run: |
+          mkdir -p package/searxng-search
+          cp dist/package.json dist/*.js package/searxng-search/
+          cp -R dist/assets package/searxng-search/assets
+          cd package && zip -r "../searxng-search-${{ github.ref_name }}.zip" searxng-search
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: searxng-search-${{ github.ref_name }}.zip
+          generate_release_notes: true
+          body: |
+            Unzip, then in Tinycast use **Settings -> Extensions -> Add from folder** and select the
+            unzipped `searxng-search` folder.
