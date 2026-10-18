@@ -7,7 +7,7 @@ Search your own [SearXNG](https://docs.searxng.org/) instance from Raycast or
 
 - Suggestions appear as you type, straight from your instance
 - Press return to open the search in your default browser
-- **Shift-Cmd-I** for an image search, with news, videos and maps on every row
+- Shortcuts for image, video and map searches: **Shift-Cmd-I**, **Shift-Cmd-Y** and **Shift-Cmd-M**
 - Search the text you have selected, with optional clipboard fallback
 - Recent searches are kept locally and reappear next time
 - Works as a fallback command, so you can throw text at it from anywhere

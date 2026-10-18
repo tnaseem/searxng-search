@@ -12,9 +12,18 @@ const CATEGORY_ACTIONS: { category: string; title: string; icon: Icon; shortcut?
     icon: Icon.Image,
     shortcut: { modifiers: ["shift", "cmd"], key: "i" },
   },
-  { category: "news", title: "Search News", icon: Icon.Document },
-  { category: "videos", title: "Search Videos", icon: Icon.Video },
-  { category: "map", title: "Search Maps", icon: Icon.Map },
+  {
+    category: "videos",
+    title: "Search Videos",
+    icon: Icon.Video,
+    shortcut: { modifiers: ["shift", "cmd"], key: "y" },
+  },
+  {
+    category: "map",
+    title: "Search Maps",
+    icon: Icon.Map,
+    shortcut: { modifiers: ["shift", "cmd"], key: "m" },
+  },
 ];
 
 export default function Command(props: { arguments?: { query?: string }; fallbackText?: string }) {
