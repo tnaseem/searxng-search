@@ -16,7 +16,7 @@ autosuggestions. Runs in Raycast and in [Tinycast](https://github.com/abue-ammar
 
 | Preference | Default | Notes |
 | --- | --- | --- |
-| Instance URL | `https://search.naseem.uk` | Scheme optional, trailing slashes trimmed |
+| Instance URL | *(blank)* | Scheme optional, trailing slashes trimmed. The commands prompt for it when empty |
 | Default Category | General | Applies to the main search URL |
 | Language | Auto | Omitted when set to Auto |
 | Safe Search | Off | `safesearch=0`, `1` or `2` |
@@ -34,6 +34,16 @@ The autocomplete response is normalised from all the shapes SearXNG's backends r
 
 A `User-Agent` header is sent explicitly because the instance's bot detection answers 429 to requests
 without one.
+
+## Icon
+
+`assets/icon.svg` is the source; `assets/icon.png` is what the manifest points at. Render the PNG with
+`rsvg-convert`, not ImageMagick - ImageMagick's built-in SVG renderer drops stroke attributes, which
+produces a blank tile:
+
+```bash
+rsvg-convert -w 512 -h 512 assets/icon.svg -o assets/icon.png
+```
 
 ## Building
 
